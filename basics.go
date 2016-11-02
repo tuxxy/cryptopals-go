@@ -29,12 +29,12 @@ func XOR_Bytes(src_a, src_b, dest []byte) {
     }
 }
 
-func FreqAnalysis(src []byte) int {
+func FreqAnalysis(s string) int {
     ETAOIN := "etaoinshrdlcumwfgypbvkjxqz"
 
     score := 0
-    for _, char := range src {
-        score += 26 - strings.Index(ETAOIN, char)
+    for _, char := range s {
+        score += 26 - strings.Index(ETAOIN, string(char))
     }
     return score
 }
@@ -55,21 +55,30 @@ func Basics_Chall2() string {
     return Stringify(byte_c)
 }
 
-func Basics_Chall3() string {
+func Basics_Chall3() (string, int) {
     ciphertext_bytes := Bytify("1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736")
-    textValue_map := make(map[string]int)
 
-    key_length := len(ciphertext_bytes)
-    for i := 0: i < 256; i++ {
+    high_val := 0
+    var high_val_str string
+
+    key_length := len(*ciphertext_bytes)
+    for i := 0; i < 256; i++ {
         // Generate a key from single char
-        key := make([]byte, key_length))
+        key := make([]byte, key_length)
         for h := 0; h < key_length; h++ {
-            key[h] = rune(i)
+            key[h] = byte(rune(i))
         }
 
         // XOR ciphertext with key
         xor_text := make([]byte, key_length)
-        XOR_Bytes(*ciphertext_bytes, *key, xor_text)
+        XOR_Bytes(*ciphertext_bytes, key, xor_text)
+        str_xor_text := string(xor_text[:])
 
+        new_high_val := FreqAnalysis(str_xor_text)
+        if new_high_val > high_val {
+            high_val = new_high_val
+            high_val_str = str_xor_text
+        }
     }
+    return high_val_str, high_val
 }
