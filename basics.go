@@ -33,8 +33,11 @@ func FreqAnalysis(s string) int {
     ETAOIN := "etaoinshrdlcumwfgypbvkjxqz"
 
     score := 0
-    for _, char := range s {
-        score += 26 - strings.Index(ETAOIN, string(char))
+    for _, char := range strings.ToLower(s) {
+        freqIndex := strings.Index(ETAOIN, string(char))
+        if freqIndex != -1 {
+            score += 26 - freqIndex
+        }
     }
     return score
 }
