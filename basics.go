@@ -85,3 +85,7 @@ func Basics_Chall3() (string, int) {
     }
     return high_val_str, high_val
 }
+
+func Basics_Chall4() (string, int) {
+
+}
