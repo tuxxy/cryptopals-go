@@ -124,3 +124,7 @@ func Basics_Chall4() (string, int) {
     }
     return highest_val_str, highest_val
 }
+
+func Basics_Chall5() string {
+    plaintext := "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal"
+}
