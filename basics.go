@@ -4,8 +4,6 @@ import (
     "strings"
     "encoding/hex"
     "encoding/base64"
-    "net/http"
-    "io/ioutil"
 )
 
 func Bytify(s string) *[]byte {
@@ -89,15 +87,40 @@ func Basics_Chall3() (string, int) {
 }
 
 func Basics_Chall4() (string, int) {
-    resp, err := http.Get("http://cryptopals.com/static/challenge-data/4.txt")
-    if err != nil {
-        panic(err)
-    }
-    defer resp.Body.Close()
+    chall_file := GetBody("http://cryptopals.com/static/challenge-data/4.txt")
+    cipher_strings := strings.Split(string(chall_file), "\n")
 
-    data, err := ioutil.ReadAll(resp.Body)
-    if err != nil {
-        panic(err)
+    highest_val := 0
+    var highest_val_str string
+
+    for _, ciphertext := range cipher_strings {
+        high_val := 0
+        var high_val_str string
+
+        key_length := len(ciphertext)
+        for i := 0; i < 256; i++ {
+            // Generate key from single char
+            key := make([]byte, key_length)
+            for h := 0; h < key_length; h++ {
+                key[h] = byte(rune(i))
+            }
+
+            // XOR ciphertext with key
+            xor_text := make([]byte, key_length)
+            XOR_Bytes(*Bytify(ciphertext), key, xor_text)
+            str_xor_text := string(xor_text[:])
+
+            new_high_val := FreqAnalysis(str_xor_text)
+            if new_high_val > high_val {
+                high_val = new_high_val
+                high_val_str = str_xor_text
+            }
+        }
+        
+        if high_val > highest_val {
+            highest_val = high_val
+            highest_val_str = high_val_str
+        }
     }
-    cipher_strings := strings.Split(string(data), "\n")
+    return highest_val_str, highest_val
 }

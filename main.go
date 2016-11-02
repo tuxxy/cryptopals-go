@@ -23,5 +23,6 @@ func main() {
 
     // Set 1 Challenge 4
     fmt.Println("-- Challenge 4 --")
-    _, _ = Basics_Chall4()
+    plaintext, plain_val = Basics_Chall4()
+    fmt.Printf("Plaintext: %v\nValue: %v\n", plaintext, plain_val)
 }
