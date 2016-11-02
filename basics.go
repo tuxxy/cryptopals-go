@@ -29,6 +29,15 @@ func XOR_Bytes(src_a, src_b, dest []byte) {
     }
 }
 
+func FreqAnalysis(src []byte) int {
+    ETAOIN := "etaoinshrdlcumwfgypbvkjxqz"
+
+    score := 0
+    for _, char := range src {
+        score += 26 - strings.Index(ETAOIN, char)
+    }
+}
+
 func Basics_Chall1() string {
     hex_string := "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d"
     b64_msg := Bytes_b64(Bytify(hex_string))
@@ -46,5 +55,20 @@ func Basics_Chall2() string {
 }
 
 func Basics_Chall3() string {
-    ETAOIN := "etaoinshrdlcumwfgypbvkjxqz"
+    ciphertext_bytes := Bytify("1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736")
+    textValue_map := make(map[string]int)
+
+    key_length := len(ciphertext_bytes)
+    for i := 0: i < 256; i++ {
+        // Generate a key from single char
+        key := make([]byte, key_length))
+        for h := 0; h < key_length; h++ {
+            key[h] = rune(i)
+        }
+
+        // XOR ciphertext with key
+        xor_text := make([]byte, key_length)
+        XOR_Bytes(*ciphertext_bytes, *key, xor_text)
+
+    }
 }
