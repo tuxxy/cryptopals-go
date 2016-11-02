@@ -4,6 +4,8 @@ import (
     "strings"
     "encoding/hex"
     "encoding/base64"
+    "net/http"
+    "io/ioutil"
 )
 
 func Bytify(s string) *[]byte {
@@ -87,5 +89,15 @@ func Basics_Chall3() (string, int) {
 }
 
 func Basics_Chall4() (string, int) {
+    resp, err := http.Get("http://cryptopals.com/static/challenge-data/4.txt")
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
 
+    data, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+        panic(err)
+    }
+    cipher_strings := strings.Split(string(data), "\n")
 }

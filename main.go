@@ -20,4 +20,8 @@ func main() {
     fmt.Println("-- Challenge 3 --")
     plaintext, plain_val := Basics_Chall3()
     fmt.Printf("Plaintext: %v\nValue: %v\n", plaintext, plain_val)
+
+    // Set 1 Challenge 4
+    fmt.Println("-- Challenge 4 --")
+    _, _ = Basics_Chall4()
 }
