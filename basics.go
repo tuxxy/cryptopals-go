@@ -43,3 +43,7 @@ func Basics_Chall2() string {
 
     return Stringify(byte_c)
 }
+
+func Basics_Chall3() string {
+    
+}
