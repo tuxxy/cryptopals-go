@@ -1,6 +1,7 @@
 package main
 
 import (
+    "strings"
     "encoding/hex"
     "encoding/base64"
 )
@@ -45,5 +46,5 @@ func Basics_Chall2() string {
 }
 
 func Basics_Chall3() string {
-    
+    ETAOIN := "etaoinshrdlcumwfgypbvkjxqz"
 }
