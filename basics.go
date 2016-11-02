@@ -36,6 +36,7 @@ func FreqAnalysis(src []byte) int {
     for _, char := range src {
         score += 26 - strings.Index(ETAOIN, char)
     }
+    return score
 }
 
 func Basics_Chall1() string {
