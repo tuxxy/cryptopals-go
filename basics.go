@@ -28,4 +28,6 @@ func Basics_Chall1() string {
     return b64_msg
 }
 
-func Basics_Chall2() 
+func Basics_Chall2() {
+
+}
