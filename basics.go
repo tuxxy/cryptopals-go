@@ -23,7 +23,7 @@ func Bytes_b64(src *[]byte) string {
 }
 
 func XOR_Bytes(src_a, src_b, dest []byte) {
-    for i := 0; i < len(src_a); ++i {
+    for i := 0; i < len(src_a); i++ {
         dest[i] = src_a[i] ^ src_b[i]
     }
 }
@@ -34,6 +34,12 @@ func Basics_Chall1() string {
     return b64_msg
 }
 
-func Basics_Chall2() {
+func Basics_Chall2() string {
+    byte_msg_a := Bytify("1c0111001f010100061a024b53535009181c")
+    byte_msg_b := Bytify("686974207468652062756c6c277320657965")
 
+    byte_c := make([]byte, len(*byte_msg_a))
+    XOR_Bytes(*byte_msg_a, *byte_msg_b, byte_c)
+
+    return Stringify(byte_c)
 }
