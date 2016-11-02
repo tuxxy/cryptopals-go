@@ -29,6 +29,13 @@ func XOR_Bytes(src_a, src_b, dest []byte) {
     }
 }
 
+func XOR_BytesRep(src, key, dest []byte) {
+    key_length := len(key)
+    for i := 0; i < len(src); i++ {
+        dest[i] = src[i] ^ key[i % key_length]
+    }
+}
+
 func FreqAnalysis(s string) int {
     ETAOIN := "etaoinshrdlcumwfgypbvkjxqz"
 
