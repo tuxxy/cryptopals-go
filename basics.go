@@ -14,6 +14,14 @@ func Bytify(s string) *[]byte {
     return &byte_msg
 }
 
+func b64_bytes(s string) *[]byte {
+    data, err := base64.StdEncoding.DecodeString(s)
+    if err != nil {
+        panic(err)
+    }
+    return &data
+}
+
 func Stringify(src []byte) string {
     return hex.EncodeToString(src)
 }
